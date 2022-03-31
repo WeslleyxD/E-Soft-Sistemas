@@ -1,0 +1,76 @@
+{% extends 'cadastrar.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Listar Cadastros </title>
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- Tabela Cadastros-->
+    <table class="table table-hover table-active">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Sobrenome</th>
+                <th scope="col">Idade</th>
+                <th scope="col">Data Nascimento</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Apelido</th>
+                <th scope="col">Observação</th>
+                <th scope="col">Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for usuario in usuarios %}
+
+                <td>{{usuario.nome}}</a></td>
+                <td>{{usuario.sobrenome}}</td>
+                <td>{{usuario.idade}}</td>
+                <td>{{usuario.data_nascimento|date:"d/m/Y"}}</td>
+                <td>{{usuario.email}}</td>
+                <td>{{usuario.apelido}}</td>
+                <td>{{usuario.observacao}}</td>
+                <td>
+                    <div>
+                        <a href="{% url 'editar_cadastro' usuario.id %}">
+                            <img src="{% static 'images/editar.png' %}" alt="logo" style="width: 30px;">
+                        </a>
+                        <a href="{% url 'excluir_cadastro' usuario.id %}">
+                            <img src="{% static 'images/excluir.png' %}" alt="logo" style="width: 30px;">
+                        </a>
+                    </div>
+                </td>
+            </tr>
+
+                {% endfor %}
+
+        </tbody>
+    </table>
+
+
+    <!-- Paginação -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+            {% for pagina in usuarios.paginator.page_range %}
+            {% if usuarios.number == pagina %}
+
+            <li class="page-item active"><a class="page-link" href="?p={{ pagina }}">{{ pagina }}</a></li>
+
+            {% else %}
+
+            <li class="page-item"><a class="page-link" href="?p={{ pagina }}">{{ pagina }}</a></li>
+
+            {% endif %}
+            {% endfor %}
+
+        </ul>
+    </nav>
+    
+
+{% endblock %}

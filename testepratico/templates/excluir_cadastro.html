@@ -1,0 +1,34 @@
+{% extends 'cadastrar.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Excluir Cadastro</title>
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Template para confirmar excluir Cadastro-->
+<section class="container-excluir">
+    <div>
+        <h2>Deseja realmente excluir {{usuario.nome.title}} {{usuario.sobrenome.title}}?</h2>
+    </div>
+    <div class="container-excluir-contato">
+        <form action="{% url 'excluir_cadastro' usuario.id %}" method="post" class="form" autocomplete="off">
+            {% csrf_token %}
+            <div class="container-excluir-contato-margin">
+                <a href="{% url 'excluir_cadastro' usuario.id %}">
+                    <button type="submit" class="btn btn-danger">Confirmar</button>
+                </a>
+            </div>
+        </form>
+        <div>
+            <a href="{% url 'listar_cadastros' %}">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Voltar</button>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

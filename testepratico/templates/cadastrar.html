@@ -1,0 +1,145 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/stylee.css' %}">
+
+
+  {% block title %} <title> Index </title> {% endblock %}
+
+</head>
+
+
+<body>
+
+  <!-- HEADER -->
+  <header class="flex-container">
+    <div class="flex-item">
+      <a href="{% url 'cadastrar' %}"><img src="{% static 'images/esoft.png' %}" alt="ESOFT" width="100px"></a>
+    </div>
+    <div class="flex-item">
+      <ul>
+        <li><a href="{% url 'cadastrar' %}">Cadastrar</a></li>
+        <li><a href="{% url 'listar_cadastros' %}">Listar Cadastros</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'listar_cadastros' %}">
+
+        {% csrf_token %}
+
+        <input class="form-control mr-sm-2" type="search" placeholder="Nome do contato" aria-label="buscar"
+          name="buscar">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+
+      </form>
+    </div>
+
+  </header>
+
+
+  <hr>
+
+  {% block content %}
+
+
+    {% block messages %}
+  <!-- MESSAGES -->
+      {% if messages %}
+        {% for message in messages %}
+
+
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+          <div class="container text-center" style="margin-top: 50px;">
+            <div class="alert alert-danger" role="alert">
+              {{ message }}
+            </div>
+          </div>
+        {% endif %}
+
+        {% endfor %}
+      {% endif %}
+
+    {% endblock %}
+
+
+
+  <!--Form Cadastrar-->
+  <section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+
+              <h3 class="mb-5">Cadastrar</h3>
+              <form action="{% url 'cadastrar' %}" method="post" class="form" autocomplete="off"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <hr class="my-4">
+
+                <div class="form-outline mb-4">
+                  <label class="form-label">Nome*</label>
+                  <input type="text" class="form-control form-control-lg" name="nome" value="{{nome}}">
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label">Sobrenome*</label>
+                  <input type="text" class="form-control form-control-lg" name="sobrenome" value="{{sobrenome}}">
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label">Idade*</label>
+                  <input type="number" class="form-control form-control-lg" name="idade">
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label">Data Nascimento*</label>
+                  <input type="date" class="form-control form-control-lg" name="data_nascimento">
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label">E-mail*</label>
+                  <input type="email" class="form-control form-control-lg" name="email">
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label">Apelido</label>
+                  <input type="text" class="form-control form-control-lg" name="apelido">
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label">Observação</label>
+                  <input type="text" class="form-control form-control-lg" name="observacao">
+                </div>
+
+                <button class="btn btn-primary btn-lg btn-block" style="margin-bottom: 20px;"
+                  type="submit">Cadastrar</button>
+
+              </form>
+
+              <hr class="my-4">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% endblock %}
+
+
+
+</body>
+
+</html>
