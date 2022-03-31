@@ -1,7 +1,7 @@
 <h1 align="center"> E-Soft Sistemas </h1>
 
 ## ✔️ Introdução
-**😁 Projeto simples para amplificar meus conhecimentos com Django. Espero que gostem 😁**
+**😁 Projeto simples para amplificar meus conhecimentos com Django utilizando Function Based View. Espero que gostem 😁**
 
 ## 📚 Tecnologias utilizadas
 **Django, sqlite, Requests, HTML, CSS e Bootstrap**
